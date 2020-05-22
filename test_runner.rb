@@ -127,3 +127,50 @@ p my_result_count
 p [1, 2, 4, 2].my_count
 p [1, 2, 4, 2].my_count(2)
 puts %w[ant bear cat].my_count('cat')
+
+puts 'map:::::::::::::::::::::::::'
+p [1, 2, 3, 4].map
+
+puts 'my_map:::::::::::::::::::::::::'
+p [1, 2, 3, 4].my_map
+
+puts 'my_map_accepts_proc:::::::::::::::::::::::::'
+proc = proc do |i|
+  i * i
+end
+block = proc do |i|
+  i * i
+end
+p [1, 2, 3, 4].map(&proc)
+p [1, 2, 3, 4].my_map(&proc)
+p [1, 2, 3, 4].my_map_accepts_proc proc
+
+puts 'my_map_accepts_proc_and_block when a proc is passed:::::::::::::::::::::::::'
+p [1, 2, 3, 4].my_map_accepts_proc_and_block proc, &block
+
+puts 'my_map_accepts_proc_and_block when a block is passed:::::::::::::::::::::::::'
+p [1, 2, 3, 4].my_map_accepts_proc_and_block nil, &block
+
+puts 'inject:::::::::::::'
+puts [5, 6, 7, 8, 9, 10].inject(:+)
+inject_result = [5, 6, 7, 8, 9, 10].inject(1) { |product, n| product * n }
+puts inject_result
+inject_result = [5, 6, 7, 8, 9, 10].inject { |product, n| product * n }
+puts inject_result
+
+puts 'my_inject:::::::::::::'
+puts [5, 6, 7, 8, 9, 10].my_inject(:+)
+puts [5, 6, 7, 8, 9, 10].my_inject(:*)
+puts [5, 6, 7, 8, 9, 10].my_inject(1, :*)
+my_inject_result = [5, 6, 7, 8, 9, 10].my_inject(1) { |product, n| product * n }
+puts my_inject_result
+my_inject_result = [5, 6, 7, 8, 9, 10].my_inject { |product, n| product * n }
+puts my_inject_result
+p [5, 6, 7, 8, 9, 10].my_inject
+
+puts 'multiply_els::::::::::::::::::::::::::::::::::::::'
+
+def multiply_els(array)
+  array.my_inject(1) { |product, n| product * n }
+end
+puts multiply_els([2, 4, 5])
