@@ -3,7 +3,7 @@ module Enumerable # rubocop:todo Metrics/ModuleLength
   def my_each
     return to_enum(:my_each) unless block_given?
 
-    each do |item|
+    for item in self
       yield item
     end
   end
