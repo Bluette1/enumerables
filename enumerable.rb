@@ -2,10 +2,11 @@
 module Enumerable # rubocop:todo Metrics/ModuleLength
   def my_each
     return to_enum(:my_each) unless block_given?
+
     enum = to_enum
-    size.times do |item |
+    size.times do |_item|
       yield enum.next
-    end 
+    end
   end
 
   def my_each_with_index
