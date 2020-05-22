@@ -12,7 +12,7 @@ This is the second project of the Main Ruby curriculum at [Microverse](https:www
 
 ## Description
 
-The task was to implement some enumerable methods similar to the ones that exist in the Enumerables module in ruby .
+The task was to implement some enumerable methods similar to the ones that exist in the Enumerables module in ruby.
 
 This project is mainly about
 
