@@ -32,11 +32,6 @@ ruby enumerables.rb
 
 ## Authors
 
-**Tendongze Godson**
-- Github: [@tGodson](https://github.com/tGodson) 
-- Twitter: [@tendongze-godson](https://twitter.com/tendongze-godson) 
-- Linkedin: [linkedin](https://linkedin.com/in/tendongze95) 
-
 👤 **Marylene Sawyer**
 - Github: [@Bluette1](https://github.com/Bluette1)
 - Twitter: [@MaryleneSawyer](https://twitter.com/MaryleneSawyer)
