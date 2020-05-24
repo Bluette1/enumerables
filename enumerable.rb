@@ -87,7 +87,7 @@ module Enumerable # rubocop:todo Metrics/ModuleLength
     else
       if arg.nil?
         my_each do |item|
-          next unless !item.nil? or item == true
+          next if item.nil? or item == false
 
           return true
         end

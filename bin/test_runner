@@ -75,6 +75,7 @@ puts %w[beat beat beat].any?('beat')
 puts %w[ant beat cat].any?('BOOM/')
 puts [1, 2i, 3.14].any?(Numeric)
 puts %w[ant bear cat].any?(String)
+puts [nil, false, nil, false].any?
 
 puts 'my_any?:::::::::::::::::::'
 puts %w[ant bear cat].my_any?(/d/)
@@ -83,10 +84,11 @@ puts [nil, true, 99].my_any?
 puts [].my_any?
 puts %w[ant beat cat].my_any?('*')
 puts %w[ant beat cat].my_any?('beat')
-puts %w[beat beat beat].any?('beat')
+puts %w[beat beat beat].my_any?('beat')
 puts %w[ant beat cat].my_any?('BOOM/')
 puts [1, 2i, 3.14].my_any?(Numeric)
 puts %w[ant bear cat].my_any?(String)
+puts [nil, false, nil, false].my_any?
 
 puts 'none?::::::::::::::::::::::::::::::::'
 puts %w[ant bear cat].none?(/d/)
