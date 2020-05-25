@@ -1,0 +1,3 @@
+language = "ruby"
+run = "./bin/test_runner"
+
