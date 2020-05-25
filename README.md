@@ -12,7 +12,7 @@ This is the second project of the Main Ruby curriculum at [Microverse](https:www
 
 ## Description
 
-The task was to implement some enumerable methods similar to the ones that exist in the Enumerables module in ruby .
+The task was to implement some enumerable methods similar to the ones that exist in the Enumerables module in ruby.
 
 This project is mainly about
 
@@ -31,11 +31,6 @@ ruby enumerables.rb
 [![Run on Repl.it](https://repl.it/badge/github/Bluette1/enumerables)](https://repl.it/github/Bluette1/enumerables)
 
 ## Authors
-
-**Tendongze Godson**
-- Github: [@tGodson](https://github.com/tGodson) 
-- Twitter: [@tendongze-godson](https://twitter.com/tendongze-godson) 
-- Linkedin: [linkedin](https://linkedin.com/in/tendongze95) 
 
 👤 **Marylene Sawyer**
 - Github: [@Bluette1](https://github.com/Bluette1)
