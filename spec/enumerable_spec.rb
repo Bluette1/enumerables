@@ -238,7 +238,7 @@ describe 'enumerable' do
   describe '#multiply_els' do
     let(:item) { [1, 2, 3, 4] }
     it 'returns the expected result' do
-      expect(item.multiply_els(item)).to eq(24)
+      expect(multiply_els(item)).to eq(24)
     end
   end
 end

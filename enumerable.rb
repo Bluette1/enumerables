@@ -212,10 +212,6 @@ module Enumerable # rubocop:todo Metrics/ModuleLength
     my_map(&block)
   end
 
-  def multiply_els(arr)
-    arr.my_inject(:*)
-  end
-
   # rubocop:todo Metrics/PerceivedComplexity
   # rubocop:todo Metrics/MethodLength
   def my_inject(*args) # rubocop:todo Metrics/CyclomaticComplexity
@@ -271,4 +267,9 @@ module Enumerable # rubocop:todo Metrics/ModuleLength
   end
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/PerceivedComplexity
+end
+
+# Method to test `my_inject`
+def multiply_els(arr)
+  arr.my_inject(:*)
 end
