@@ -198,7 +198,10 @@ describe 'enumerable' do
     end
 
     it 'returns the expected result when passed a block' do
+      expect(item.my_map { 'cat' }).to eql(Array.new(4, 'cat'))
+      expect(item.my_map(&:to_s)).to eq(%w[1 2 3 4])
       expect(item.my_map(&func)).to eq(item.map(&func))
+      expect(item.my_map { |i| i * i * i }).to eq([1, 8, 27, 64])
     end
   end
 
@@ -216,6 +219,26 @@ describe 'enumerable' do
 
     it 'returns the expected result when passed a proc' do
       expect(item.my_map_accepts_proc(func)).to eq(item.map(&func))
+    end
+  end
+
+  describe '#my_inject' do
+    let(:item) { [1, 2, 3, 4] }
+    it 'accepts a symbol that references a block as an argument' do
+      expect(item.my_inject(:+)).to eq(10)
+    end
+    it 'accepts a block' do
+      expect(item.my_inject { |sum, n| sum + n }).to eq(10)
+    end
+    it 'accepts an argument as a an initiator value well as symbol as a block reference' do
+      expect((5..10).my_inject(1, :*)).to eq(151_200)
+    end
+  end
+
+  describe '#multiply_els' do
+    let(:item) { [1, 2, 3, 4] }
+    it 'returns the expected result' do
+      expect(item.multiply_els(item)).to eq(24)
     end
   end
 end
