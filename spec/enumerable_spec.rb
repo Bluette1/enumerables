@@ -234,4 +234,11 @@ describe 'enumerable' do
       expect((5..10).my_inject(1, :*)).to eq(151_200)
     end
   end
+
+  describe '#multiply_els' do
+    let(:item) { [1, 2, 3, 4] }
+    it 'returns the expected result' do
+      expect(item.multiply_els(item)).to eq(24)
+    end
+  end
 end
