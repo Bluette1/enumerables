@@ -4,7 +4,8 @@ describe 'enumerable' do
   describe '#my_each' do
     let(:item) { [1, 2, 3, 4] }
 
-    it 'returns an enumerator with the expected values' do
+    it 'returns an enumerator with the expected values when called without arguments' do
+      expect(item.my_each.class).to eql(item.each.class)
       expect(item.my_each.to_a).to match_array(item.each.to_a)
     end
 
@@ -19,7 +20,7 @@ describe 'enumerable' do
 
   describe '#my_each_with_index' do
     let(:item) { [1, 2, 3, 4] }
-    it 'returns an enumerator with the expected values' do
+    it 'returns an enumerator with the expected values when called without arguments' do
       expect(item.my_each_with_index.class).to eql(item.each_with_index.class)
       expect(item.my_each_with_index.to_a).to match_array(item.each_with_index.to_a)
     end
@@ -35,7 +36,7 @@ describe 'enumerable' do
 
   describe '#my_select' do
     let(:item) { [1, 2, 3, 4] }
-    it 'returns an enumerator with the expected values' do
+    it 'returns an enumerator with the expected values when called without arguments' do
       expect(item.my_select.class).to eql(item.select.class)
       expect(item.my_select.to_a).to match_array(item.select.to_a)
     end
@@ -181,6 +182,40 @@ describe 'enumerable' do
       (0..length).each do |i|
         expect(contexts[0][i].my_count(contexts[1][i])).to eq(contexts[0][i].count(contexts[1][i]))
       end
+    end
+  end
+
+  describe '#my_map' do
+    let(:item) { [1, 2, 3, 4] }
+
+    func = proc do |i|
+      i * i
+    end
+
+    it 'returns an enumerator with the expected values when called without arguments' do
+      expect(item.my_map.class).to eql(item.map.class)
+      expect(item.my_map.to_a).to match_array(item.map.to_a)
+    end
+
+    it 'returns the expected result when passed a block' do
+      expect(item.my_map(&func)).to eq(item.map(&func))
+    end
+  end
+
+  describe '#my_map_accepts_proc' do
+    let(:item) { [1, 2, 3, 4] }
+
+    func = proc do |i|
+      i * i
+    end
+
+    it 'returns an enumerator with the expected values when called without a proc or block' do
+      expect(item.my_map_accepts_proc(nil).class).to eql(item.map.class)
+      expect(item.my_map_accepts_proc(nil).to_a).to match_array(item.map.to_a)
+    end
+
+    it 'returns the expected result when passed a block' do
+      expect(item.my_map_accepts_proc(func)).to eq(item.map(&func))
     end
   end
 end
