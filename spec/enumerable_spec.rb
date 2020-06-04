@@ -214,7 +214,7 @@ describe 'enumerable' do
       expect(item.my_map_accepts_proc(nil).to_a).to match_array(item.map.to_a)
     end
 
-    it 'returns the expected result when passed a block' do
+    it 'returns the expected result when passed a proc' do
       expect(item.my_map_accepts_proc(func)).to eq(item.map(&func))
     end
   end
