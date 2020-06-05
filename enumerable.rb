@@ -4,7 +4,7 @@ module Enumerable # rubocop:todo Metrics/ModuleLength
     return to_enum(:my_each) unless block_given?
 
     enum = to_enum
-    size.times do 
+    size.times do
       yield enum.next
     end
     self

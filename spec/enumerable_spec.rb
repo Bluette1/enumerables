@@ -15,7 +15,9 @@ describe 'enumerable' do
       item.each { |element| expected << element + 10 }
       item.my_each { |element| actual << element + 10 }
       expect(expected).to match_array(actual)
-      expect(item.my_each{|x| x}).to eql (item.each{|x| x})
+      # rubocop:todo Lint/Void
+      expect(item.my_each { |x| x }).to eql(item.each { |x| x })
+      # rubocop:enable Lint/Void
     end
   end
 
@@ -32,7 +34,9 @@ describe 'enumerable' do
       item.each_with_index { |item, index| expected[index] = item + 10 }
       item.my_each_with_index { |item, index| actual[index] = item + 10 }
       expect(expected).to match(actual)
-      expect(item.my_each_with_index{|x| x}).to eql (item.each_with_index{|x| x})
+      # rubocop:todo Lint/Void
+      expect(item.my_each_with_index { |x| x }).to eql(item.each { |x| x })
+      # rubocop:enable Lint/Void
     end
   end
 
