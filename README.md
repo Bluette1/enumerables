@@ -1,6 +1,7 @@
 # enumerables
 
 This is the second project of the Main Ruby curriculum at [Microverse](https:www.microverse.org/) - @microverseinc.
+All public class methods tested with RSpec.
 
 # enumerables ([The Odin Project](https://github.com/TheOdinProject/curriculum/blob/master/ruby_programming/archive/basic_ruby/project_advanced_building_blocks.md#project-2-enumerable-methods))
 
@@ -25,7 +26,7 @@ This project is mainly about
 ```
 ruby enumerables.rb
 ```
-
+* Run ```rspec``` or ```rspec --format doc``` in the terminal of your root directory to run the described tests
 ## Live Demo
 
 [![Run on Repl.it](https://repl.it/badge/github/Bluette1/enumerables)](https://repl.it/github/Bluette1/enumerables)
