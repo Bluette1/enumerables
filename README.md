@@ -13,7 +13,7 @@ All public class methods tested with RSpec.
 
 ## Description
 
-The task was to implement some enumerable methods similar to the ones that exist in the Enumerables module in ruby.
+The task was to implement some enumerable methods similar to the ones that exist in the Enumerables module in ruby. Enumerable methods in ruby are a collection of methods used for traversing, searching, as well as sorting arrays, hashes and ranges. [You can read more about them here](https://ruby-doc.org/core-2.7.1/Enumerable.html)
 
 This project is mainly about
 

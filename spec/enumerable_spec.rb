@@ -1,9 +1,14 @@
 require_relative '../enumerable'
 
 describe 'enumerable' do
-  describe '#my_each' do
-    let(:item) { [1, 2, 3, 4] }
+  let(:item) { [1, 2, 3, 4] }
+  let(:item_strings) { %w[ant bear cat] }
+  let(:item_strings_other) { %w[ant beat cat] }
+  let(:regex_patterns) { [/t/, '*', 'beat', 'BOOM/'] }
+  let(:contexts) { [[[1, 2, 4, 2], item_strings, [nil, true, 99], [1, 3.14, 42]], [2, 'cat', Integer, Float]] }
+  let(:length) { contexts[0].length - 1 }
 
+  describe '#my_each' do
     it 'returns an enumerator with the expected values when called without arguments' do
       expect(item.my_each.class).to eql(item.each.class)
       expect(item.my_each.to_a).to match_array(item.each.to_a)
@@ -16,13 +21,12 @@ describe 'enumerable' do
       item.my_each { |element| actual << element + 10 }
       expect(expected).to match_array(actual)
       # rubocop:todo Lint/Void
-      expect(item.my_each { |x| x }).to eql(item.each { |x| x })
+      expect(item.my_each { |element| element }).to eql(item.each { |element| element })
       # rubocop:enable Lint/Void
     end
   end
 
   describe '#my_each_with_index' do
-    let(:item) { [1, 2, 3, 4] }
     it 'returns an enumerator with the expected values when called without arguments' do
       expect(item.my_each_with_index.class).to eql(item.each_with_index.class)
       expect(item.my_each_with_index.to_a).to match_array(item.each_with_index.to_a)
@@ -35,13 +39,12 @@ describe 'enumerable' do
       item.my_each_with_index { |item, index| actual[index] = item + 10 }
       expect(expected).to match(actual)
       # rubocop:todo Lint/Void
-      expect(item.my_each_with_index { |x| x }).to eql(item.each { |x| x })
+      expect(item.my_each_with_index { |element| element }).to eql(item.each { |element| element })
       # rubocop:enable Lint/Void
     end
   end
 
   describe '#my_select' do
-    let(:item) { [1, 2, 3, 4] }
     it 'returns an enumerator with the expected values when called without arguments' do
       expect(item.my_select.class).to eql(item.select.class)
       expect(item.my_select.to_a).to match_array(item.select.to_a)
@@ -53,28 +56,23 @@ describe 'enumerable' do
   end
 
   describe '#my_all' do
-    let(:item) { %w[ant bear cat] }
-
     it 'returns the expected result when passed a block' do
-      expect(item.my_all? { |word| word.length >= 3 }).to eq(item.all? { |word| word.length >= 3 })
-      expect(item.my_all? { |word| word.length >= 4 }).to eq(item.all? { |word| word.length >= 4 })
-      expect(item.my_all? { |word| word.length.even? }).to eq(item.all? { |word| word.length.even? })
+      expect(item_strings.my_all? { |word| word.length >= 3 }).to eq(item_strings.all? { |word| word.length >= 3 })
+      expect(item_strings.my_all? { |word| word.length >= 4 }).to eq(item_strings.all? { |word| word.length >= 4 })
+      expect(item_strings.my_all? { |word| word.length.even? }).to eq(item_strings.all? { |word| word.length.even? })
     end
 
     it 'returns the expected result for a regex test' do
-      expect(item.my_all?(/t/)).to eq(item.all?(/t/))
+      expect(item_strings.my_all?(/t/)).to eq(item_strings.all?(/t/))
       expect(%w[beat beat beat].my_all?).to eq(%w[beat beat beat].all?('beat'))
     end
 
-    let(:item) { %w[ant beat cat] }
-    let(:contexts) { [/t/, '*', 'beat', 'BOOM/'] }
     it 'returns the expected result for a regex test' do
-      contexts.each do |context|
-        expect(item.my_all?(context)).to eq(item.all?(context))
+      regex_patterns.each do |regex_pattern|
+        expect(item_strings_other.my_all?(regex_pattern)).to eq(item_strings_other.all?(regex_pattern))
       end
     end
-    let(:contexts) { [[[1, 2i, 3.14], %w[ant bear cat], [nil, true, 99]], [Numeric, String, Integer]] }
-    let(:length) { contexts[0].length - 1 }
+
     it 'returns the expected result for class tests' do
       (0..length).each do |i|
         expect(contexts[0][i].my_all?(contexts[1][i])).to eq(contexts[0][i].all?(contexts[1][i]))
@@ -92,29 +90,24 @@ describe 'enumerable' do
   end
 
   describe '#my_any' do
-    let(:item) { %w[ant bear cat] }
-
     it 'returns the expected result when passed a block' do
-      expect(item.my_any? { |word| word.length >= 3 }).to eq(item.any? { |word| word.length >= 3 })
-      expect(item.my_any? { |word| word.length >= 4 }).to eq(item.any? { |word| word.length >= 4 })
-      expect(item.my_any? { |word| word.length.even? }).to eq(item.any? { |word| word.length.even? })
+      expect(item_strings.my_any? { |word| word.length >= 3 }).to eq(item_strings.any? { |word| word.length >= 3 })
+      expect(item_strings.my_any? { |word| word.length >= 4 }).to eq(item_strings.any? { |word| word.length >= 4 })
+      expect(item_strings.my_any? { |word| word.length.even? }).to eq(item_strings.any? { |word| word.length.even? })
     end
 
     it 'returns the expected result for a regex test' do
-      expect(item.my_any?(/t/)).to eq(item.any?(/t/))
-      expect(item.my_any?(/d/)).to eq(item.any?(/d/))
+      expect(item_strings.my_any?(/t/)).to eq(item_strings.any?(/t/))
+      expect(item_strings.my_any?(/d/)).to eq(item_strings.any?(/d/))
       expect(%w[beat beat beat].my_any?('beat')).to eq(%w[beat beat beat].any?('beat'))
     end
 
-    let(:item) { %w[ant beat cat] }
-    let(:contexts) { [/t/, '*', 'beat', 'BOOM/'] }
     it 'returns the expected result for a regex test' do
-      contexts.each do |context|
-        expect(item.my_any?(context)).to eq(item.any?(context))
+      regex_patterns.each do |regex_pattern|
+        expect(item_strings.my_any?(regex_pattern)).to eq(item_strings.any?(regex_pattern))
       end
     end
-    let(:contexts) { [[[1, 2i, 3.14], %w[ant bear cat], [nil, true, 99]], [Numeric, String, Integer]] }
-    let(:length) { contexts[0].length - 1 }
+
     it 'returns the expected result for class tests' do
       (0..length).each do |i|
         expect(contexts[0][i].my_any?(contexts[1][i])).to eq(contexts[0][i].any?(contexts[1][i]))
@@ -132,30 +125,23 @@ describe 'enumerable' do
   end
 
   describe '#my_none' do
-    let(:item) { %w[ant bear cat] }
-
     it 'returns the expected result when passed a block' do
-      expect(item.my_none? { |word| word.length < 3 }).to eq(item.none? { |word| word.length < 3 })
-      expect(item.my_none? { |word| word.length >= 4 }).to eq(item.none? { |word| word.length >= 4 })
-      expect(item.my_none? { |word| word.length.even? }).to eq(item.none? { |word| word.length.even? })
+      expect(item_strings.my_none? { |word| word.length < 3 }).to eq(item_strings.none? { |word| word.length < 3 })
+      expect(item_strings.my_none? { |word| word.length >= 4 }).to eq(item_strings.none? { |word| word.length >= 4 })
+      expect(item_strings.my_none? { |word| word.length.even? }).to eq(item_strings.none? { |word| word.length.even? })
     end
 
     it 'returns the expected result for a regex test' do
-      expect(item.my_none?(/t/)).to eq(item.none?(/t/))
+      expect(item_strings.my_none?(/t/)).to eq(item_strings.none?(/t/))
       expect(%w[beat beat beat].my_none?('beat')).to eq(%w[beat beat beat].none?('beat'))
     end
 
-    let(:item) { %w[ant beat cat] }
-    let(:contexts) { [/t/, '*', 'beat', 'BOOM/'] }
     it 'returns the expected result for a regex test' do
-      contexts.each do |context|
-        expect(item.my_none?(context)).to eq(item.none?(context))
+      regex_patterns.each do |regex_pattern|
+        expect(item_strings_other.my_none?(regex_pattern)).to eq(item_strings_other.none?(regex_pattern))
       end
     end
-    let(:contexts) do
-      [[[1, 2i, 3.14], %w[ant bear cat], [nil, true, 99], [1, 3.14, 42]], [Numeric, String, Integer, Float]]
-    end
-    let(:length) { contexts[0].length - 1 }
+
     it 'returns the expected result for class tests' do
       (0..length).each do |i|
         expect(contexts[0][i].my_none?(contexts[1][i])).to eq(contexts[0][i].none?(contexts[1][i]))
@@ -173,7 +159,6 @@ describe 'enumerable' do
   end
 
   describe '#my_count' do
-    let(:item) { [1, 2, 3, 4] }
     it 'returns the number of elements' do
       expect(item.my_count).to eq(item.count)
     end
@@ -182,8 +167,6 @@ describe 'enumerable' do
       expect(item.my_count(&:even?)).to eq(item.count(&:even?))
     end
 
-    let(:contexts) { [[[1, 2, 4, 2], %w[ant bear cat], [nil, true, 99], [1, 3.14, 42]], [2, 'cat', Integer, Float]] }
-    let(:length) { contexts[0].length - 1 }
     it 'returns the expected result for class tests' do
       (0..length).each do |i|
         expect(contexts[0][i].my_count(contexts[1][i])).to eq(contexts[0][i].count(contexts[1][i]))
@@ -192,8 +175,6 @@ describe 'enumerable' do
   end
 
   describe '#my_map' do
-    let(:item) { [1, 2, 3, 4] }
-
     func = proc do |i|
       i * i
     end
@@ -212,8 +193,6 @@ describe 'enumerable' do
   end
 
   describe '#my_map_accepts_proc' do
-    let(:item) { [1, 2, 3, 4] }
-
     func = proc do |i|
       i * i
     end
@@ -229,7 +208,6 @@ describe 'enumerable' do
   end
 
   describe '#my_inject' do
-    let(:item) { [1, 2, 3, 4] }
     it 'accepts a symbol that references a block as an argument' do
       expect(item.my_inject(:+)).to eq(10)
     end
@@ -242,7 +220,6 @@ describe 'enumerable' do
   end
 
   describe '#multiply_els' do
-    let(:item) { [1, 2, 3, 4] }
     it 'returns the expected result' do
       expect(multiply_els(item)).to eq(24)
     end
