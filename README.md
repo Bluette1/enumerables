@@ -38,6 +38,13 @@ ruby enumerables.rb
 - Twitter: [@MaryleneSawyer](https://twitter.com/MaryleneSawyer)
 - Linkedin: [Marylene Sawyer](https://www.linkedin.com/in/marylene-sawyer-b4ba1295/)
 
+👤 **Glory David** 
+    
+- LinkedIn: [Glorydavid](https://www.linkedin/in/glory-david/) 
+- GitHub: [@glowreeyah](https://github.com/glowreeyah)
+- E-mail: glodave99@gmail.com
+- Twitter: [@gloweeeyah](https://twitter.com/gloweeeyah)
+
 ## 📝 License
 
 This project is [MIT](https://opensource.org/licenses/MIT) licensed.
