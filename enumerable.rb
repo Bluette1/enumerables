@@ -4,9 +4,10 @@ module Enumerable # rubocop:todo Metrics/ModuleLength
     return to_enum(:my_each) unless block_given?
 
     enum = to_enum
-    size.times do |_item|
+    size.times do
       yield enum.next
     end
+    self
   end
 
   def my_each_with_index
@@ -267,4 +268,9 @@ module Enumerable # rubocop:todo Metrics/ModuleLength
   end
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/PerceivedComplexity
+end
+
+# Method to test `my_inject`
+def multiply_els(arr)
+  arr.my_inject(:*)
 end
